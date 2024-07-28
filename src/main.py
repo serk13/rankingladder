@@ -27,6 +27,8 @@ def main():
             name = input("Name des Spielers: ")
             score = get_integer_input("Punktezahl des Spielers: ")
             add_player(name, score)
+            print(f"Spieler {name} mit der Punktzahl {score} wurde hinzugefügt.")
+
         elif choice == '2':  # Rangliste anzeigen.
             players = get_all_players()
             for player in players:
@@ -38,11 +40,19 @@ def main():
                 print(f"Kein Spieler mit der ID {player_id} gefunden.")
         elif choice == '4':  # Spieler löschen.
             player_id = get_integer_input("ID des zu löschenden Spielers: ")
-            delete_player(player_id)
-            print(f"Spieler {player_id} wurde gelöscht.")
+            confirm = input(f"Bist du sicher, dass du den Spieler mit der ID {player_id} löschen möchtest? (ja/nein): ")
+            if confirm.lower() == 'ja':
+                delete_player(player_id)
+                print(f"Spieler {player_id} wurde gelöscht.")
+            else:
+                print("Löschvorgang abgebrochen.")
         elif choice == '5':  # Alle Punkte zurücksetzen.
-            reset_all_scores()
-            print("Alle Punkte wurden zurückgesetzt.")
+            confirm = input("Bist du sicher, dass du alle Punkte zurücksetzen möchtest? (ja/nein): ")
+            if confirm.lower() == 'ja':
+                reset_all_scores()
+                print("Alle Punkte wurden zurückgesetzt.")
+            else:
+                print("Zurücksetzen abgebrochen.")
         elif choice == '6':  # Spieler suchen.
             search_query = input("Gib den Namen des Spielers ein, den du suchen möchtest: ")
             found_players = search_player(search_query)
@@ -52,7 +62,8 @@ def main():
             else:
                 print("Kein Spieler gefunden.")
         elif choice == '7':  # Beenden des Programms.
-            break
+            print("Programm wird beendet...")
+            raise SystemExit
         else:
             print("Ungültige Auswahl.")  # Fehlermeldung bei ungültiger Menüauswahl.
 
