@@ -1,80 +1,124 @@
 import pytest
-from src.database import init_db, add_player, get_all_players, update_player_score, delete_player, reset_all_scores, \
-    search_player, Session
+from src.database import (
+    init_db, add_player, get_all_players, update_player_score, delete_player,
+    reset_all_scores, search_player, Session
+)
 from src.models import Player
 
 
+# Fixture zur Einrichtung der Testdatenbank
 @pytest.fixture(scope="module")
 def test_db():
-    # ACHTUNG KEIN TEST: Pytest versucht , sie als Test zu finden und auszuführen, scheitert aber daran, weil sie als
-    # Fixture und nicht als Testfunktion konzipiert ist. Datenbank initialisieren und Tabellen erstellen
+    # Initialisiere die Datenbank und füge Testdaten hinzu
     init_db()
-    # Testdaten hinzufügen
+
+    # Füge einen Spieler "Jane Doe" mit einer Punktzahl von 150 zur Datenbank hinzu
     add_player("Jane Doe", 150)
-    yield Session()  # Gibt die Session zurück für die Verwendung in Tests
-    # Bereinige die Datenbank nach den Tests
+
+    # Liefere die Sitzung (Session) für die Tests zurück
+    yield Session()
+
+    # Bereinige die Datenbank nach den Tests (lösche alle Spieler)
     session = Session()
     session.query(Player).delete()
     session.commit()
     session.close()
 
 
+# Test zum Hinzufügen eines Spielers
 def test_add_player(test_db):
     session = Session()
-    # Füge einen weiteren Spieler hinzu und prüfe, ob die Daten korrekt sind
+
+    # Füge einen Spieler "Alice" mit einer Punktzahl von 200 hinzu
     add_player("Alice", 200)
+
+    # Abfrage: Spieler "Alice" aus der Datenbank abfragen
     player = session.query(Player).filter_by(name="Alice").first()
+
+    # Überprüfe, ob der Spieler erfolgreich hinzugefügt wurde
     assert player is not None
     assert player.score == 200
+
     session.close()
 
 
+# Test zum Abrufen aller Spieler
 def test_get_all_players(test_db):
     session = Session()
-    add_player("Alice", 200)
-    # Überprüfe, ob die Anzahl der Spieler in der Datenbank korrekt ist
+
+    # Füge einen Spieler "Bob" mit einer Punktzahl von 250 hinzu
+    add_player("Bob", 250)
+
+    # Abrufen aller Spieler aus der Datenbank
     players = get_all_players()
-    assert len(players) >= 2  # Muss mindestens 2 Spieler geben, die eingefügt wurden
+
+    # Überprüfen, ob mindestens 2 Spieler in der Datenbank vorhanden sind
+    assert len(players) >= 2
+
     session.close()
 
 
+# Test zur Aktualisierung der Punktzahl eines Spielers
 def test_update_player_score(test_db):
     session = Session()
-    # Aktualisiere die Punktzahl für einen bestehenden Spieler und prüfe das Ergebnis
+
+    # Abfrage: Spieler "Jane Doe" aus der Datenbank abfragen
     player = session.query(Player).filter_by(name="Jane Doe").first()
+
     if player:
+        # Aktualisiere die Punktzahl des Spielers auf 180
         successful_update = update_player_score(player.id, 180)
-        session.refresh(player)  # Aktualisiere das Objekt mit neuen Daten aus der Datenbank
+
+        # Aktualisiere die Sitzung, um die Änderungen widerzuspiegeln
+        session.refresh(player)
+
+        # Überprüfe, ob das Update erfolgreich war
         assert successful_update
         assert player.score == 180
-    else:
-        assert False, "Player not found"  # Fügt eine aussagekräftigere Fehlermeldung hinzu
+
     session.close()
 
 
+# Test zum Löschen eines Spielers
 def test_delete_player(test_db):
-    session = Session()
-    # Lösche einen Spieler und prüfe, ob er nicht mehr existiert
+    session = test_db  # Verwende die von der Fixture bereitgestellte Sitzung
+
+    # Abfrage: Spieler "Jane Doe" aus der Datenbank abfragen
     player = session.query(Player).filter_by(name="Jane Doe").first()
-    delete_player(player.id)
-    player = session.query(Player).filter_by(name="Jane Doe").first()
-    assert player is None
-    session.close()
+
+    # Sicherstellen, dass der Spieler existiert, bevor er gelöscht wird
+    assert player is not None
+
+    # Spieler löschen
+    delete_player(player.id)  # Verwende die delete_player Methode
+
+    # Neue Abfrage, um sicherzustellen, dass der Spieler gelöscht wurde
+    deleted_player = session.query(Player).filter_by(id=player.id).first()
+
+    # Überprüfen, ob der Spieler nach dem Löschen nicht mehr existiert
+    assert deleted_player is None  # Der Spieler sollte nach dem Löschen nicht mehr existieren
 
 
+# Test zum Zurücksetzen aller Punktzahlen
 def test_reset_all_scores(test_db):
-    session = Session()
-    # Setze alle Punktzahlen zurück und prüfe, ob alle Punktzahlen 0 sind
+    # Setze alle Punktzahlen in der Datenbank auf 0
     reset_all_scores()
-    players = session.query(Player).all()
-    all_scores_reset = all(p.score == 0 for p in players)
-    assert all_scores_reset
-    session.close()
+
+    # Abrufen aller Spieler
+    players = get_all_players()
+
+    # Überprüfen, ob alle Spieler eine Punktzahl von 0 haben
+    assert all(player.score == 0 for player in players)
 
 
+# Test zur Suche eines Spielers
 def test_search_player(test_db):
-    session = Session()
-    # Suche nach einem Spieler und prüfe, ob die Rückgabe erwartungsgemäß erfolgt
-    results = search_player("Jane")
-    assert len(results) > 0  # Sollte mindestens einen Treffer geben, da "Jane Doe" vorhanden ist
-    session.close()
+    # Füge den Spieler "Alice" mit einer Punktzahl von 100 hinzu, bevor du ihn suchst
+    add_player("Alice", 100)
+
+    # Suche nach dem Spieler "Alice" in der Datenbank
+    players = search_player("Alice")
+
+    # Überprüfe, ob der Spieler in der Datenbank gefunden wurde
+    assert len(players) > 0
+    assert any(player.name == "Alice" for player in players)

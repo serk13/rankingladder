@@ -1,62 +1,63 @@
-# Importieren der benötigten Module und Klassen für die Datenbankinteraktion.
 from sqlalchemy.orm import sessionmaker
 from .models import engine, Base, Player
 
-# Funktion zum Initialisieren der Datenbank, d.h. zum Erstellen aller Tabellen, basierend auf den in models.py definierten Modellen.
+# Initialisieren der Datenbank durch Erstellen aller Tabellen
 def init_db():
-    Base.metadata.create_all(engine)  # Erstellt alle Tabellen im Datenbankschema, falls sie noch nicht existieren.
+    Base.metadata.create_all(engine)
 
-# Funktion zum Hinzufügen eines neuen Spielers zur Datenbank.
+# Hinzufügen eines neuen Spielers zur Datenbank
 def add_player(name, score):
-    session = Session()  # Eine neue Session wird gestartet.
-    new_player = Player(name=name, score=score)  # Erzeugen eines neuen Player-Objekts.
-    session.add(new_player)  # Das neue Player-Objekt wird zur Session hinzugefügt.
-    session.commit()  # Die Änderungen werden in der Datenbank festgeschrieben.
-    session.close()  # Die Session wird geschlossen.
+    session = Session()
+    new_player = Player(name=name, score=score)
+    session.add(new_player)
+    session.commit()
+    session.close()
 
-# Funktion, die alle Spieler aus der Datenbank abruft, sortiert nach ihrer Punktzahl in absteigender Reihenfolge.
+# Abrufen aller Spieler, sortiert nach Punktzahl in absteigender Reihenfolge
 def get_all_players():
-    session = Session()  # Eine neue Session wird gestartet.
-    players = session.query(Player).order_by(Player.score.desc()).all()  # Abfrage aller Spieler, sortiert nach Score.
-    session.close()  # Die Session wird geschlossen.
-    return players  # Rückgabe der Spielerliste.
+    session = Session()
+    players = session.query(Player).order_by(Player.score.desc()).all()
+    session.close()
+    return players
 
-# Funktion zum Löschen eines Spielers anhand seiner ID.
+# Löschen eines Spielers anhand seiner ID
 def delete_player(player_id):
-    session = Session()  # Eine neue Session wird gestartet.
-    player = session.query(Player).get(player_id)  # Versuch, den Spieler mit der gegebenen ID zu finden.
+    session = Session()
+    player = session.query(Player).get(player_id)
     if player:
-        session.delete(player)  # Wenn der Spieler gefunden wurde, wird er aus der Datenbank gelöscht.
-        session.commit()  # Die Änderungen werden in der Datenbank festgeschrieben.
-    session.close()  # Die Session wird geschlossen.
+        session.delete(player)  # Der Spieler wird zur Löschung markiert
+        session.commit()  # Die Änderungen werden in der Datenbank gespeichert
+    session.close()  # Schließe die Sitzung
 
-# Funktion zum Zurücksetzen der Punkte aller Spieler in der Datenbank.
+
+
+# Zurücksetzen der Punktzahlen aller Spieler
 def reset_all_scores():
-    session = Session()  # Eine neue Session wird gestartet.
-    players = session.query(Player).all()  # Abfrage aller Spieler.
+    session = Session()
+    players = session.query(Player).all()
     for player in players:
-        player.score = 0  # Setzen der Punktzahl jedes Spielers auf 0.
-    session.commit()  # Die Änderungen werden in der Datenbank festgeschrieben.
-    session.close()  # Die Session wird geschlossen.
+        player.score = 0
+    session.commit()
+    session.close()
 
-# Funktion zur Suche nach Spielern anhand ihres Namens. Die Suche ist nicht case-sensitive.
+# Suchen von Spielern anhand ihres Namens (nicht case-sensitiv)
 def search_player(name):
-    session = Session()  # Eine neue Session wird gestartet.
-    player = session.query(Player).filter(Player.name.ilike(f'%{name}%')).all()  # Abfrage der Spieler, deren Namen den Suchbegriff enthalten.
-    session.close()  # Die Session wird geschlossen.
-    return player  # Rückgabe der gefundenen Spieler.
+    session = Session()
+    player = session.query(Player).filter(Player.name.ilike(f'%{name}%')).all()
+    session.close()
+    return player
 
-# Funktion zum Aktualisieren der Punktzahl eines Spielers anhand seiner ID.
+# Aktualisieren der Punktzahl eines Spielers anhand seiner ID
 def update_player_score(player_id, new_score):
-    session = Session()  # Eine neue Session wird gestartet.
-    player = session.query(Player).get(player_id)  # Versuch, den Spieler mit der gegebenen ID zu finden.
+    session = Session()
+    player = session.query(Player).get(player_id)
     if player:
-        player.score = new_score  # Wenn der Spieler gefunden wurde, wird seine Punktzahl aktualisiert.
-        session.commit()  # Die Änderungen werden in der Datenbank festgeschrieben.
-        session.close()  # Die Session wird geschlossen.
-        return True  # Rückgabe von True, wenn die Aktualisierung erfolgreich war.
-    session.close()  # Die Session wird geschlossen, auch wenn der Spieler nicht gefunden wurde.
-    return False  # Rückgabe von False, wenn kein Spieler gefunden wurde.
+        player.score = new_score
+        session.commit()
+        session.close()
+        return True
+    session.close()
+    return False
 
-# Konfiguration der Session-Fabrik, die mit dem oben definierten Engine-Objekt verbunden ist.
+# Konfiguration des Session-Makers
 Session = sessionmaker(bind=engine)
