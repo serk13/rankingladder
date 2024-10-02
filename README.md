@@ -226,6 +226,6 @@ In der Planung für zukünftige Versionen des Projekts wurden mehrere Erweiterun
 
 10. **Einbindung Torunament-Rule-Klasse"**:
 -    **Aktueller Zustand**: Der Punktestand wird manuell im System hinzugefügt.
--    **Verbesserungsvorschlag**: Verschiede Tournaments verwenden verschieden Punktevergabenlogiken. Die Logiken können im Projekt definiert werdnen und anschliessend aktivieret oder deaktiviert werden. Anschliessend passiert die Punkteberechnung automatisch anhand vom "Outcome" des Matches.
+-    **Verbesserungsvorschlag**: Verschiede Tournaments verwenden verschieden Punktevergabenlogiken. Die Logiken können im Projekt definiert werdnen und anschliessend aktivieret oder deaktiviert werden. Anschliessend passiert die Punkteberechnung automatisch anhand vom "Outcome" des Matches. 
 
 #

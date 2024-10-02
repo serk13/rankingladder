@@ -23,12 +23,15 @@ def get_all_players():
 # Löschen eines Spielers anhand seiner ID
 def delete_player(player_id):
     session = Session()
-    player = session.query(Player).get(player_id)
+    player = session.query(Player).get(player_id)  # Spieler wird in der Datenbank gesucht
     if player:
         session.delete(player)  # Der Spieler wird zur Löschung markiert
         session.commit()  # Die Änderungen werden in der Datenbank gespeichert
-    session.close()  # Schließe die Sitzung
-
+        session.close()  # Schließe die Sitzung
+        return True  # Erfolgreich gelöscht
+    else:
+        session.close()  # Schließe die Sitzung auch im Fehlerfall
+        return False  # Spieler existiert nicht
 
 
 # Zurücksetzen der Punktzahlen aller Spieler
