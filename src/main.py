@@ -1,7 +1,6 @@
 # Import der benötigten Funktionen aus der database.py Datei für die Interaktion mit der Datenbank.
-from src.database import init_db, add_player, get_all_players, update_player_score, delete_player, reset_all_scores, \
-    search_player
-
+import sys
+from src.database import init_db, add_player, get_all_players, update_player_score, delete_player, reset_all_scores, search_player
 
 # Hilfsfunktion zur sicheren Abfrage von ganzzahligen Eingaben.
 def get_integer_input(prompt):
@@ -11,7 +10,6 @@ def get_integer_input(prompt):
             return int(user_input)  # Versucht die Eingabe in eine Ganzzahl umzuwandeln.
         except ValueError:
             print("Bitte eine gültige Zahl eingeben.")  # Fehlermeldung bei ungültiger Eingabe.
-
 
 # Hauptfunktion des Programms, die das Menü steuert und auf Benutzereingaben reagiert.
 def main():
@@ -42,8 +40,7 @@ def main():
             player_id = get_integer_input("ID des Spielers: ")  # ID des Spielers abfragen
             new_score = get_integer_input("Neue Punktezahl: ")  # Neue Punktzahl abfragen
             if not update_player_score(player_id, new_score):  # Versuchen, die Punktzahl zu aktualisieren
-                print(
-                    f"Kein Spieler mit der ID {player_id} gefunden.")  # Fehlermeldung, falls die ID nicht gefunden wird
+                print(f"Kein Spieler mit der ID {player_id} gefunden.")  # Fehlermeldung, falls die ID nicht gefunden wird
 
         elif choice == '4':  # Spieler löschen.
             player_id = get_integer_input("ID des zu löschenden Spielers: ")  # ID des zu löschenden Spielers abfragen
@@ -52,8 +49,7 @@ def main():
                 if delete_player(player_id):  # Löschen des Spielers, wenn er existiert
                     print(f"Spieler {player_id} wurde gelöscht.")  # Erfolgsmeldung
                 else:
-                    print(
-                        f"Spieler mit der ID {player_id} existiert nicht.")  # Fehlermeldung, wenn der Spieler nicht existiert
+                    print(f"Spieler mit der ID {player_id} existiert nicht.")  # Fehlermeldung, wenn der Spieler nicht existiert
             else:
                 print("Löschvorgang abgebrochen.")  # Nachricht, wenn der Nutzer den Löschvorgang abbricht
 
@@ -66,19 +62,17 @@ def main():
                 print("Zurücksetzen abgebrochen.")  # Nachricht, wenn der Nutzer den Vorgang abbricht
 
         elif choice == '6':  # Spieler suchen.
-            search_query = input(
-                "Gib den Namen des Spielers ein, den du suchen möchtest: ")  # Suchanfrage nach dem Spielernamen
+            search_query = input("Gib den Namen des Spielers ein, den du suchen möchtest: ")  # Suchanfrage nach dem Spielernamen
             found_players = search_player(search_query)  # Spieler in der Datenbank suchen
             if found_players:
                 for player in found_players:
                     print(player)  # Gefundene Spieler anzeigen
             else:
-                print(
-                    f"Kein Spieler mit dem Namen {search_query} gefunden.")  # Fehlermeldung, wenn kein Spieler gefunden wurde
+                print(f"Kein Spieler mit dem Namen {search_query} gefunden.")  # Fehlermeldung, wenn kein Spieler gefunden wurde
 
         elif choice == '7':  # Programm beenden.
             print("Programm wird beendet.")  # Nachricht, dass das Programm beendet wird
-            break  # Endlosschleife beenden und Programm schließen
+            sys.exit()  # Programm beenden und SystemExit auslösen
 
         else:
             print("Ungültige Auswahl. Bitte wähle eine gültige Option.")  # Fehlermeldung bei ungültiger Menüoption

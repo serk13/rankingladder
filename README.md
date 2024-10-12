@@ -60,23 +60,54 @@ Die Anwendung kann direkt über das Terminal gestartet werden:
 	***ACHTUNG: Aktueller Zustand keine API verwendung. Die API verwendungen habe ich bereits aufgelistet, falls das Tool später mit einer API ergänzt wird***
    Dadurch wird der Webserver gestartet und die API ist unter `http://127.0.0.1:8000` erreichbar.
 
-#### 5. Tests ausführen
+#### 5. Anleitung Code testen
 
-Um sicherzustellen, dass alles korrekt funktioniert, kannst du die vorhandenen Tests ausführen:
+Um die Stabilität und Zuverlässigkeit der `rankingladder`-Software sicherzustellen, ist das regelmäßige Ausführen von Tests unerlässlich. Die Software nutzt Unit-Tests und Integrationstests, die mit dem Test-Framework `pytest` erstellt wurden. Es wird empfohlen, alle Tests auszuführen, bevor Änderungen an der Software vorgenommen oder neue Funktionen implementiert werden.
 
-1. **Pytest installieren** (falls noch nicht geschehen):
+##### Voraussetzungen für Tests:
 
-   ```bash
-   poetry install pytest
+Stelle sicher, dass alle Abhängigkeiten für das Projekt installiert sind, indem du den folgenden Befehl ausführst:
+
+```bash
+poetry install
+```
+
+Dies stellt sicher, dass `pytest` und alle weiteren Test-Bibliotheken in der Umgebung vorhanden sind.
+
+1. **Testumgebung aktivieren**
+
+   Aktiviere die virtuelle Umgebung, die von `poetry` erstellt wurde, um sicherzustellen, dass alle Pakete und Abhängigkeiten korrekt verwendet werden:
+
+   ```sh
+   poetry shell
    ```
 
-2. **Tests ausführen**:
+2. **Unit-Tests und Integrationstests ausführen**
 
-   ```bash
+   Die Tests für die Anwendung befinden sich im Verzeichnis `tests`. Um alle Tests auszuführen, nutze den folgenden Befehl:
+
+   ```sh
    pytest
    ```
 
-   Diese Tests überprüfen die grundlegende Funktionalität der Anwendung, einschliesslich der Datenbanklogik und der Modelle.
+   Dieser Befehl führt alle im Projekt vorhandenen Tests aus, um sicherzustellen, dass alle Funktionen der Anwendung wie erwartet arbeiten.
+
+3. **Tests in PyCharm ausführen**
+
+   Falls du die Tests in der Entwicklungsumgebung PyCharm ausführen möchtest, stelle sicher, dass das Projekt korrekt als Poetry-Projekt konfiguriert ist. PyCharm erkennt dann automatisch `pytest` als Testframework. Du kannst einzelne Testdateien oder Methoden direkt aus der IDE starten, indem du auf das grüne Abspiel-Symbol neben den Testfunktionen klickst.
+
+4. **Testabdeckung prüfen**
+
+   Um die Testabdeckung zu prüfen, kannst du `pytest` mit dem Coverage-Plugin verwenden. Führe dazu folgenden Befehl aus:
+
+   ```sh
+   pytest --cov=src
+   ```
+
+   Dieser Befehl zeigt an, welche Teile des Codes getestet wurden und gibt dir Hinweise darauf, wo möglicherweise noch Tests fehlen.
+
+Durch die Nutzung von `pytest` und der Integration in PyCharm kannst du sicherstellen, dass der Code stabil bleibt und alle Funktionen korrekt arbeiten.
+
 
 #### 6. Nutzung der API
 ***ACHTUNG: Aktueller Zustand keine API verwendung. Die API verwendungen habe ich bereits aufgelistet, falls das Tool später mit einer API ergänzt wird***
