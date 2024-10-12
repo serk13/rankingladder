@@ -1,6 +1,8 @@
 ### Kurze Beschreibung
 
-Die `rankingladder`-Software ist ein leistungsstarkes Tool zur Verwaltung von Ranglisten und Spielergebnissen. Sie ermöglicht es, Spieler zu einem System hinzuzufügen, ihre Punktzahlen zu verfolgen, Ranglisten zu erstellen und Spielerinformationen basierend auf verschiedenen Kriterien abzurufen oder zu aktualisieren. Die Software wurde entwickelt, um einfache und effiziente Verwaltung von Wettbewerben, Turnieren oder Ligen zu ermöglichen. Sie bietet eine benutzerfreundliche Schnittstelle für die Verwaltung von Spielerstatistiken und unterstützt die Erstellung von dynamischen Ranglisten, die sich automatisch aktualisieren, wenn sich die Punktzahlen der Spieler ändern.
+Die `rankingladder`-Software ist ein leistungsstarkes Tool zur Verwaltung von Ranglisten und Spielergebnissen. Sie ermöglicht es, Spieler zu einem System hinzuzufügen, ihre Punktzahlen zu verfolgen, Ranglisten zu erstellen und Spielerinformationen basierend auf verschiedenen Kriterien abzurufen oder zu aktualisieren.
+Die Software wurde entwickelt, um einfache und effiziente Verwaltung von Wettbewerben, Turnieren oder Ligen zu ermöglichen.
+Sie bietet eine benutzerfreundliche Schnittstelle für die Verwaltung von Spielerstatistiken und unterstützt die Erstellung von dynamischen Ranglisten, die sich automatisch aktualisieren, wenn sich die Punktzahlen der Spieler ändern.
 
 ### Anleitung: Start, Tests und Nutzung der `rankingladder`-Software
 
@@ -62,7 +64,7 @@ Die Anwendung kann direkt über das Terminal gestartet werden:
 
 #### 5. Anleitung Code testen
 
-Um die Stabilität und Zuverlässigkeit der `rankingladder`-Software sicherzustellen, ist das regelmäßige Ausführen von Tests unerlässlich. Die Software nutzt Unit-Tests und Integrationstests, die mit dem Test-Framework `pytest` erstellt wurden. Es wird empfohlen, alle Tests auszuführen, bevor Änderungen an der Software vorgenommen oder neue Funktionen implementiert werden.
+Um die Stabilität und Zuverlässigkeit der `rankingladder`-Software sicherzustellen, ist das regelmässige Ausführen von Tests unerlässlich. Die Software nutzt Unit-Tests und Integrationstests, die mit dem Test-Framework `pytest` erstellt wurden. Es wird empfohlen, alle Tests auszuführen, bevor Änderungen an der Software vorgenommen oder neue Funktionen implementiert werden.
 
 ##### Voraussetzungen für Tests:
 
@@ -78,7 +80,7 @@ Dies stellt sicher, dass `pytest` und alle weiteren Test-Bibliotheken in der Umg
 
    Aktiviere die virtuelle Umgebung, die von `poetry` erstellt wurde, um sicherzustellen, dass alle Pakete und Abhängigkeiten korrekt verwendet werden:
 
-   ```sh
+   ```bash
    poetry shell
    ```
 
@@ -86,7 +88,7 @@ Dies stellt sicher, dass `pytest` und alle weiteren Test-Bibliotheken in der Umg
 
    Die Tests für die Anwendung befinden sich im Verzeichnis `tests`. Um alle Tests auszuführen, nutze den folgenden Befehl:
 
-   ```sh
+   ```bash
    pytest
    ```
 
@@ -100,7 +102,7 @@ Dies stellt sicher, dass `pytest` und alle weiteren Test-Bibliotheken in der Umg
 
    Um die Testabdeckung zu prüfen, kannst du `pytest` mit dem Coverage-Plugin verwenden. Führe dazu folgenden Befehl aus:
 
-   ```sh
+   ```bash
    pytest --cov=src
    ```
 
@@ -133,7 +135,7 @@ Nachdem die Anwendung läuft, kannst du die API nutzen. Hier sind einige grundle
 
 #### 7. Wichtige Hinweise
 
-- **Datenbank**: Die Anwendung verwendet standardmässig eine SQLite-Datenbank (`rankingladder.db`), die im Projektverzeichnis erstellt wird.
+- **Datenbank**: Die Anwendung verwendet standardmässig eine SQLite-Datenbank (`rankingladder.db`), die im Projektverzeichnis erstellt wird. SQLAlchemy wird als ORM verwendet, um die Interaktion mit der Datenbank zu verwalten und zu vereinfachen
 - **Konfiguration**: Anpassungen an der Datenbankverbindung und anderen Einstellungen können in den entsprechenden Konfigurationsdateien vorgenommen werden.
 - **Dokumentation**: Die API-Dokumentation ist über den `/docs`-Endpunkt verfügbar, sobald der Server läuft.
 
@@ -225,11 +227,11 @@ In der Planung für zukünftige Versionen des Projekts wurden mehrere Erweiterun
 
 2. **Einführung von Dependency Injection**:
    - **Aktueller Zustand**: Derzeit wird die Datenbankverbindung direkt im Code der Hauptanwendung und Tests erstellt.
-   - **Verbesserungsvorschlag**: Die Implementierung von Dependency Injection (DI) würde die Flexibilität erhöhen. Dies könnte durch die Verwendung von `FastAPI` und Pydantic für die Konfiguration erfolgen, wie es in `services.zip` möglicherweise der Fall ist.
+   - **Verbesserungsvorschlag**: Die Implementierung von Dependency Injection (DI) würde die Flexibilität erhöhen. Dies könnte durch die Verwendung von `FastAPI` und Pydantic für die Konfiguration erfolgen.
 
 3. **API-Router und Endpunkte**:
-   - **Aktueller Zustand**: Im `rankingladder`-Projekt gibt es noch keinen klar definierten API-Router zu geben.
-   - **Verbesserungsvorschlag**: API-Router sollten für verschiedene Funktionalitäten wie `players`, `scores`, und `matches` eingeführt werden. Dies verbessert die Erweiterbarkeit und Lesbarkeit des Codes, insbesondere wenn die Anzahl der Endpunkte wächst.
+   - **Aktueller Zustand**: Im `rankingladder`-Projekt gibt es noch keinen klar definierten API-Router.
+   - **Verbesserungsvorschlag**: API-Router sollten für verschiedene Funktionalitäten wie `players`, `scores` und `matches` eingeführt werden. Dies verbessert die Erweiterbarkeit und Lesbarkeit des Codes, insbesondere wenn die Anzahl der Endpunkte wächst.
 
 4. **Asynchrone Programmierung**:
    - **Aktueller Zustand**: Alle Datenbankoperationen sind synchron, was die Leistung bei einer hohen Anzahl gleichzeitiger Anfragen beeinträchtigen könnte.
@@ -250,13 +252,17 @@ In der Planung für zukünftige Versionen des Projekts wurden mehrere Erweiterun
 8. **Dokumentation und API-Dokumentation**:
    - **Aktueller Zustand**: Die Dokumentation des Projekts ist minimal.
    - **Verbesserungsvorschlag**: Eine detaillierte API-Dokumentation (z.B. mit Swagger/OpenAPI) und eine erweiterte Projektdokumentation im README, die Installationsanweisungen, Codebeispiele und Architekturdiagramme umfasst, sollte hinzugefügt werden.
-   
-9. **Einbindung einer "Confest.py Datei"**:
--    **Aktueller Zustand**: Datenbankinitialiserungen erfolgen beim Test in der benötigten Klassen.
--    **Verbesserungsvorschlag**: Beim Ausbau des Projektes, wäre es sinnvoll eventuell die Initialsierungen über eine Zentrale Klassen zu definieren.
 
-10. **Einbindung Torunament-Rule-Klasse"**:
--    **Aktueller Zustand**: Der Punktestand wird manuell im System hinzugefügt.
--    **Verbesserungsvorschlag**: Verschiede Tournaments verwenden verschieden Punktevergabenlogiken. Die Logiken können im Projekt definiert werdnen und anschliessend aktivieret oder deaktiviert werden. Anschliessend passiert die Punkteberechnung automatisch anhand vom "Outcome" des Matches. 
+9. **Einbindung einer "Confest.py" Datei**:
+   - **Aktueller Zustand**: Datenbankinitialisierungen erfolgen bei den Tests in den benötigten Klassen.
+   - **Verbesserungsvorschlag**: Beim Ausbau des Projekts wäre es sinnvoll, die Initialisierungen über eine zentrale Datei (`conftest.py`) zu definieren, um die Wiederverwendbarkeit und Wartbarkeit zu verbessern.
+
+10. **Einbindung einer "Tournament-Rule"-Klasse**:
+    - **Aktueller Zustand**: Der Punktestand wird manuell im System hinzugefügt.
+    - **Verbesserungsvorschlag**: Verschiedene Turniere verwenden unterschiedliche Punktvergabelogiken. Die Logiken könnten im Projekt definiert und anschliessend aktiviert oder deaktiviert werden, sodass die Punkteberechnung automatisch anhand des Match-Outcomes erfolgt.
+
+11. **Kompatibilität mit SQLAlchemy 2.0 sicherstellen**:
+    - **Aktueller Zustand**: Der Code verwendet einige veraltete Funktionen, die in SQLAlchemy 2.0 nicht mehr unterstützt werden.
+    - **Verbesserungsvorschlag**: Um die Zukunftssicherheit des Projekts zu gewährleisten, sollte der Code kompatibel mit SQLAlchemy 2.0 gemacht werden. Momentan wird die Version in der `.toml`-Datei auf `<2.0` begrenzt, um sicherzustellen, dass veraltete API-Features weiterhin unterstützt bleiben. Langfristig sollte jedoch der Code so angepasst werden, dass er die neuen APIs von SQLAlchemy 2.0 verwendet.
 
 #
