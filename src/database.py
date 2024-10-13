@@ -1,10 +1,12 @@
 from sqlalchemy.orm import sessionmaker
-from .models import engine, Base, Player
+from src.models import engine, Base, Player
+
 
 # Initialisieren der Datenbank durch Erstellen aller Tabellen
 def init_db():
     # Erstellt alle Tabellen, die im Base-Objekt definiert sind, falls sie noch nicht existieren
     Base.metadata.create_all(engine)
+
 
 # Hinzufügen eines neuen Spielers zur Datenbank
 def add_player(name, score):
@@ -19,6 +21,7 @@ def add_player(name, score):
     # Schließt die Sitzung
     session.close()
 
+
 # Abrufen aller Spieler, sortiert nach Punktzahl in absteigender Reihenfolge
 def get_all_players():
     # Erstellt eine neue Sitzung, um mit der Datenbank zu interagieren
@@ -29,6 +32,7 @@ def get_all_players():
     session.close()
     # Gibt die Liste der Spieler zurück
     return players
+
 
 # Löschen eines Spielers anhand seiner ID
 def delete_player(player_id):
@@ -51,6 +55,7 @@ def delete_player(player_id):
         # Gibt False zurück, um anzuzeigen, dass der Spieler nicht existiert
         return False
 
+
 # Zurücksetzen der Punktzahlen aller Spieler
 def reset_all_scores():
     # Erstellt eine neue Sitzung, um mit der Datenbank zu interagieren
@@ -65,6 +70,7 @@ def reset_all_scores():
     # Schließt die Sitzung
     session.close()
 
+
 # Suchen von Spielern anhand ihres Namens (nicht case-sensitiv)
 def search_player(name):
     # Erstellt eine neue Sitzung, um mit der Datenbank zu interagieren
@@ -75,6 +81,7 @@ def search_player(name):
     session.close()
     # Gibt die Liste der gefundenen Spieler zurück
     return player
+
 
 # Aktualisieren der Punktzahl eines Spielers anhand seiner ID
 def update_player_score(player_id, new_score):
@@ -95,6 +102,7 @@ def update_player_score(player_id, new_score):
     session.close()
     # Gibt False zurück, um anzuzeigen, dass der Spieler nicht existiert
     return False
+
 
 # Konfiguration des Session-Makers
 # Erstellt eine Session-Klasse, die mit der Datenbank-Engine verbunden ist und verwendet werden kann, um Sitzungen zu erstellen

@@ -265,4 +265,39 @@ In der Planung für zukünftige Versionen des Projekts wurden mehrere Erweiterun
     - **Aktueller Zustand**: Der Code verwendet einige veraltete Funktionen, die in SQLAlchemy 2.0 nicht mehr unterstützt werden.
     - **Verbesserungsvorschlag**: Um die Zukunftssicherheit des Projekts zu gewährleisten, sollte der Code kompatibel mit SQLAlchemy 2.0 gemacht werden. Momentan wird die Version in der `.toml`-Datei auf `<2.0` begrenzt, um sicherzustellen, dass veraltete API-Features weiterhin unterstützt bleiben. Langfristig sollte jedoch der Code so angepasst werden, dass er die neuen APIs von SQLAlchemy 2.0 verwendet.
 
+12. **Spieler löschen Funktion verbessern**:
+   - **Aktueller Zustand**: Derzeit kann die Funktion "Spieler löschen" eine negative Spieler-ID akzeptieren, was nicht passieren sollte.
+   - **Verbesserungsvorschlag**: Spieler mit negativen IDs sollten als ungültige Eingaben interpretiert und abgelehnt werden. Diese Prüfung sollte noch implementiert werden, um die Datenintegrität zu gewährleisten.
+
+13. **Fehlermeldungen und Benutzerführung verbessern**:
+   - **Aktueller Zustand**: Die Fehlermeldungen im Programm sind nicht ausführlich genug und bieten wenig Unterstützung für den Benutzer.
+   - **Verbesserungsvorschlag**: Die Fehlermeldungen sollten ausführlicher gestaltet werden, um den Benutzern genauere Hinweise auf Eingabefehler oder notwendige Korrekturen zu geben. Eine benutzerfreundlichere Fehlerbehandlung würde die Usability der Anwendung erhöhen.
+
+14. **Transaktionsmanagement optimieren**:
+   - **Aktueller Zustand**: Für jede einzelne Datenbankoperation wird eine eigene Sitzung verwendet, was zu einer erhöhten Datenbanklast führen kann.
+   - **Verbesserungsvorschlag**: Das Transaktionsmanagement könnte optimiert werden, indem mehrere Operationen in einer Sitzung zusammengefasst werden. Dadurch würde die Datenbanklast verringert und die Konsistenz der Daten erhöht.
+   
+15. **Performance-Optimierung durch Indexierung**:
+   - **Aktueller Zustand**: Die Datenbankabfragen, insbesondere die Suche nach Spielern und das Abrufen aller Spieler, können bei einer grossen Anzahl von Datensätzen langsam sein.
+   - **Verbesserungsvorschlag**: Die Leistung der Datenbank könnte verbessert werden, indem für häufig abgefragte Felder, wie die Spieler-ID und den Namen, Indizes hinzugefügt werden. Dies würde die Geschwindigkeit von Abfragen erhöhen und die Performance des Systems verbessern.
+
+16. **Backup- und Wiederherstellungsmechanismus implementieren**:
+   - **Aktueller Zustand**: Aktuell gibt es keine Möglichkeit, die Datenbank regelmässig zu sichern oder im Falle eines Fehlers wiederherzustellen.
+   - **Verbesserungsvorschlag**: Ein automatisierter Backup-Mechanismus sollte implementiert werden, um regelmässige Sicherungen der Datenbank durchzuführen. Dies würde die Datenintegrität schützen und sicherstellen, dass im Falle eines Fehlers oder Datenverlusts eine Wiederherstellung möglich ist.
+
+17. **Rollenbasierte Zugriffskontrolle einführen**:
+   - **Aktueller Zustand**: Derzeit gibt es keine rollenbasierte Zugriffskontrolle, sodass jeder Benutzer vollen Zugriff auf alle Funktionen hat.
+   - **Verbesserungsvorschlag**: Eine rollenbasierte Zugriffskontrolle sollte eingeführt werden, um sicherzustellen, dass nur autorisierte Benutzer bestimmte Aktionen ausführen können. Zum Beispiel könnten Administratoren die Berechtigung haben, Spieler zu löschen, während normale Benutzer nur ihre eigenen Daten sehen und aktualisieren können.
+
+18. **Automatisierte Tests erweitern**:
+   - **Aktueller Zustand**: Die bestehenden Tests decken einige Funktionen ab, aber nicht alle Szenarien sind abgedeckt. (Test-coverage aktuell bei 73%)
+   - **Verbesserungsvorschlag**: Die Testabdeckung sollte erweitert werden, insbesondere um Grenzfälle und Fehlerbedingungen abzudecken. Automatisierte Integrationstests könnten eingeführt werden, um sicherzustellen, dass die verschiedenen Module korrekt zusammenarbeiten und um Regressionen in der Funktionalität zu vermeiden.
+
+16. **Optimierung der Benutzeroberfläche**:
+   - **Aktueller Zustand**: Das Projekt verfügt über keine grafische Benutzeroberfläche (GUI), sondern wird ausschließlich über die Kommandozeile bedient.
+   - **Verbesserungsvorschlag**: Die Entwicklung einer einfachen GUI könnte die Benutzererfahrung erheblich verbessern und das Programm für weniger technikaffine Nutzer zugänglicher machen. Eine GUI könnte mit Frameworks wie Tkinter oder PyQt erstellt werden.
+
+17. **Erweiterung der Spielerstatistiken**:
+   - **Aktueller Zustand**: Derzeit werden nur der Name und die Punktzahl der Spieler verwaltet.
+   - **Verbesserungsvorschlag**: Die Spielerstatistiken könnten erweitert werden, um zusätzliche Informationen wie Spielhistorie, gewonnene Turniere und persönliche Bestleistungen zu erfassen. Dies würde die Anwendungsvielfalt erhöhen und mehr Daten für Analysen zur Verfügung stellen.
 #

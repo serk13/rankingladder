@@ -7,6 +7,7 @@ from src.models import Player
 
 
 # Fixture zur Einrichtung der Testdatenbank
+# REMINDER: Kein TestPy
 @pytest.fixture(scope="module")
 def test_db():
     # Initialisiere die Datenbank und füge Testdaten hinzu

@@ -3,21 +3,23 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from src.models import Base, Player
 
+
 # Fixture zur Einrichtung einer In-Memory-Datenbank für die Tests.
 @pytest.fixture(scope="module")
 def setup_database():
     # In-Memory SQLite-Datenbank erstellen.
     engine = create_engine('sqlite:///:memory:')
-    Session = sessionmaker(bind=engine)
+    session_actual = sessionmaker(bind=engine)
     # Datenbankschema erstellen (Tabellen generieren).
     Base.metadata.create_all(engine)
-    session = Session()
+    session = session_actual()
 
     yield session
 
     # Datenbank schließen und Tabellen löschen.
     session.close()
     Base.metadata.drop_all(engine)
+
 
 # Test für das Spieler-Datenmodell.
 def test_player_model(setup_database):
@@ -34,6 +36,7 @@ def test_player_model(setup_database):
     assert fetched_player.name == "John Doe"
     assert fetched_player.score == 100
 
+
 # Test für die Vermeidung von Duplikaten bei Spielern.
 def test_player_duplicate(setup_database):
     session = setup_database
@@ -49,6 +52,7 @@ def test_player_duplicate(setup_database):
     players = session.query(Player).filter_by(name="Alice").all()
     # Sicherstellen, dass kein Duplikat existiert.
     assert len(players) == 1
+
 
 # Test für die Aktualisierung der Punktzahl eines Spielers.
 def test_player_score_update(setup_database):
@@ -69,6 +73,7 @@ def test_player_score_update(setup_database):
     # Abfrage: Aktualisierte Punktzahl überprüfen.
     updated_player = session.query(Player).filter_by(name="John Doe").first()
     assert updated_player.score == 150
+
 
 # Test für das Löschen eines Spielers aus der Datenbank.
 def test_player_deletion(setup_database):
