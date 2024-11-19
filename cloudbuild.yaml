@@ -1,0 +1,18 @@
+steps:
+  # Schritt 1: Baue ein Docker-Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/rankingsladder', '.']
+
+  # Schritt 2: Push das Docker-Image in die Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/rankingsladder']
+
+  # Schritt 3: Optional: Führe Tests aus
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', '--rm', 'gcr.io/$PROJECT_ID/rankingsladder', 'poetry', 'run', 'pytest']
+
+images:
+  - 'gcr.io/$PROJECT_ID/rankingsladder'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
