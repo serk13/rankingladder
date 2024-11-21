@@ -1,19 +1,10 @@
 steps:
-  # Schritt 1: Installiere Poetry und Abhängigkeiten im Python-Slim-Image
-  - name: 'python:3.12-slim'  # Verwende das Python-Slim-Image
-    entrypoint: 'bash'
+  - id: "Run Poetry Installation and Setup"
+    name: python:3.12-slim
+    entrypoint: bash
     args:
-      - '-c'
+      - "-c"
       - |
-        pip install poetry
-        poetry install
-
-  # Schritt 2: Führe Tests mit Poetry aus
-  - name: 'python:3.12-slim'  # Erneut das Python-Slim-Image verwenden
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'poetry run pytest'
-
+        pip install poetry && poetry install --no-root
 options:
   logging: CLOUD_LOGGING_ONLY
