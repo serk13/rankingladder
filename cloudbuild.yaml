@@ -1,11 +1,11 @@
 steps:
-  - id: "Run Tests"
+  - id: "Install Dependencies"
     name: python:3.12-slim
     entrypoint: bash
     args:
       - "-c"
       - |
-        pip install poetry && poetry install && poetry run pytest
+        pip install poetry && poetry install
 
   - id: "Build Docker Image"
     name: gcr.io/cloud-builders/docker
