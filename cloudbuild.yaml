@@ -8,18 +8,18 @@ steps:
         pip install poetry && poetry install && poetry run pytest
 
   - id: "Build Docker Image"
-    name: "gcr.io/cloud-builders/docker"
+    name: gcr.io/cloud-builders/docker
     args:
       - "build"
       - "-t"
-      - "gcr.io/he22-blog-serkan/rankingsladder:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
       - "."
 
   - id: "Push Docker Image"
-    name: "gcr.io/cloud-builders/docker"
+    name: gcr.io/cloud-builders/docker
     args:
       - "push"
-      - "gcr.io/he22-blog-serkan/rankingsladder:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
 
 options:
   logging: CLOUD_LOGGING_ONLY
