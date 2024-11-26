@@ -35,7 +35,11 @@ steps:
       - "managed"
       - "--allow-unauthenticated"
       - "--port"
-      - "8000"  # Explizit Port 8080 angeben
+      - "8000"
+      - "--min-instances"
+      - "0"  # Minimale Anzahl von Instanzen auf 0 setzen
+      - "--max-instances"
+      - "1"  # Maximale Anzahl von Instanzen auf 1 setzen
 
 options:
   logging: CLOUD_LOGGING_ONLY
