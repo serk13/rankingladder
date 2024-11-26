@@ -6,5 +6,23 @@ steps:
       - "-c"
       - |
         pip install poetry && poetry install --no-root
+
+  - id: "Build Docker Image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
+      - "."
+
+  - id: "Push Docker Image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
+
 options:
   logging: CLOUD_LOGGING_ONLY
+
+images:
+  - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
