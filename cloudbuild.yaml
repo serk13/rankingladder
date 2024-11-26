@@ -30,10 +30,12 @@ steps:
       - "--image"
       - "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
       - "--region"
-      - "europe-west1"  # Region auf europa-west1 geändert
+      - "europe-west1"
       - "--platform"
       - "managed"
       - "--allow-unauthenticated"
+      - "--port"
+      - "8000"  # Explizit Port 8080 angeben
 
 options:
   logging: CLOUD_LOGGING_ONLY
