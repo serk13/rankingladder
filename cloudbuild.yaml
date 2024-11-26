@@ -12,17 +12,17 @@ steps:
     args:
       - "build"
       - "-t"
-      - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
+      - "europe-west1-docker.pkg.dev/HE22-Blog-Serkan/rankingsladder-repo/rankingsladder:latest"
       - "."
 
   - id: "Push Docker Image"
     name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
-      - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
+      - "europe-west1-docker.pkg.dev/HE22-Blog-Serkan/rankingsladder-repo/rankingsladder:latest"
 
 options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/rankingsladder:latest"
+  - "europe-west1-docker.pkg.dev/HE22-Blog-Serkan/rankingsladder-repo/rankingsladder:latest"
