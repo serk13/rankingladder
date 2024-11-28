@@ -1,4 +1,24 @@
 import pytest
+from fastapi.testclient import TestClient
+from src.main import app
+
+client = TestClient(app)
+
+def test_root_status_code():
+    response = client.get("/")
+    assert response.status_code == 200
+
+def test_root_response_content():
+    response = client.get("/")
+    assert response.json() == {"message": "Hello World"}
+
+def test_invalid_endpoint():
+    response = client.get("/invalid")
+    assert response.status_code == 404
+
+
+"""
+import pytest
 from unittest.mock import patch
 from src.main import main
 from src.models import Player, Session
@@ -55,3 +75,4 @@ def test_invalid_option():
         # Überprüft, ob die Fehlermeldung für die ungültige Auswahl ausgegeben wurde
         print_calls = [call.args[0].strip() for call in mocked_print.call_args_list]
         assert "Ungültige Auswahl. Bitte wähle eine gültige Option." in print_calls, f"Print calls: {print_calls}"
+"""

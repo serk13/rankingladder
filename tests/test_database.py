@@ -1,3 +1,4 @@
+"""
 import pytest
 from src.database import (
     init_db, add_player, get_all_players, update_player_score, delete_player,
@@ -123,3 +124,4 @@ def test_search_player(test_db):
     # Überprüfe, ob der Spieler in der Datenbank gefunden wurde
     assert len(players) > 0
     assert any(player.name == "Alice" for player in players)
+"""

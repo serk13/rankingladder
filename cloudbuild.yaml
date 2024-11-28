@@ -7,6 +7,14 @@ steps:
       - |
         pip install poetry && poetry install
 
+  - id: "Run Tests"
+    name: python:3.12-slim
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        pip install poetry && poetry install && pytest --maxfail=5 --disable-warnings
+
   - id: "Build Docker Image"
     name: gcr.io/cloud-builders/docker
     args:

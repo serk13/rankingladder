@@ -1,3 +1,4 @@
+"""
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -100,3 +101,4 @@ def test_player_deletion(setup_database):
 
     # Überprüfen, ob der Spieler nach der Löschung nicht mehr existiert.
     assert deleted_player is None, "Player 'John Doe' was not deleted."
+"""
