@@ -12,8 +12,7 @@ steps:
     entrypoint: bash
     args:
       - "-c"
-      - |
-        pip install poetry && poetry install && pytest --maxfail=5 --disable-warnings
+      - "pip install poetry && poetry install && poetry run pytest"
 
   - id: "Build Docker Image"
     name: gcr.io/cloud-builders/docker
