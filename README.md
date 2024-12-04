@@ -212,9 +212,6 @@ EXPOSE 8000
 
 ---
 
-Falls weitere Anpassungen erforderlich sind, lass es mich wissen!Hier ist das Kapitel 11 mit nützlichen Links, das du zu deinem `README.md` hinzufügen kannst:
-
----
 
 ## 11. Nützliche Links
 
