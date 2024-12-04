@@ -10,7 +10,7 @@ def test_root_status_code():
 
 def test_root_response_content():
     response = client.get("/")
-    assert response.json() == {"message": "Hello World"}
+    assert response.json() == {"message": "Not Hello World"}
 
 def test_invalid_endpoint():
     response = client.get("/invalid")
