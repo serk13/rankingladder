@@ -1,6 +1,3 @@
-Hier ist die überarbeitete `README.md`, wobei `Dockerfile` und `cloudbuild.yaml` mit eigenen Überschriften versehen wurden:
-
----
 
 ## 1. GitHub-Projekt mit Google Cloud Build verbinden
 
