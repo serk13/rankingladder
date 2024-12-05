@@ -51,6 +51,7 @@ Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
   - **Benachrichtigung:** Aktiviere die Benachrichtigung bei 100%.
 
 ![Budget erstellen](images/Budgeterstellen1.png)
+
 ![Budget config](images/Budgetconfig1.png)
 ![Budget config2](images/Budgeterstellen2.png)
 
