@@ -1,3 +1,18 @@
+# Inhaltsverzeichnis
+
+1. [GitHub-Projekt mit Google Cloud Build verbinden](#1-github-projekt-mit-google-cloud-build-verbinden)
+2. [Trigger für Pipeline bei jedem Push erstellen](#2-trigger-für-pipeline-bei-jedem-push-erstellen)
+3. [Cloud-Projekt und Budget einrichten](#3-cloud-projekt-und-budget-einrichten)
+4. [cloudbuild.yaml erweitern und anpassen](#4-cloudbuildyaml-erweitern-und-anpassen)
+5. [Dockerfile erweitern und anpassen](#5-dockerfile-erweitern-und-anpassen)
+6. [Cloud Run Deployment überprüfen](#6-cloud-run-deployment-überprüfen)
+7. [Berechtigungen anpassen](#7-berechtigungen-anpassen)
+8. [Projekt pushen und Pipeline testen](#8-projekt-pushen-und-pipeline-testen)
+9. [Logs und Fehleranalyse](#9-logs-und-fehleranalyse)
+10. [Service-URL kopieren und Anwendung testen](#10-service-url-kopieren-und-anwendung-testen)
+11. [Nützliche Links](#11-nützliche-links)
+
+---
 
 ## 1. GitHub-Projekt mit Google Cloud Build verbinden
 
@@ -7,7 +22,7 @@ Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
 ![Cloud Build Bereich](images/Cloudubildtrigger0.png)
 
 ### GitHub-Repository verknüpfen
-1. Klicke auf **Trigger** und anschliessend auf **Trigger hinzufügen**.
+1. Klicke auf **Trigger** und anschließend auf **Trigger hinzufügen**.
 2. Wähle **GitHub** als Repository-Quelle und folge den Anweisungen zur Verknüpfung deines GitHub-Kontos mit der Google Cloud.
 3. Wähle in der Liste dein Repository **rankingladder** aus.
 
@@ -211,7 +226,6 @@ EXPOSE 8000
 
 ---
 
-
 ## 11. Nützliche Links
 
 Hier sind einige hilfreiche Links, um deine Dokumentation und Entwicklung zu unterstützen:
@@ -238,3 +252,4 @@ Hier sind einige hilfreiche Links, um deine Dokumentation und Entwicklung zu unt
   Unterstützung zur Nutzung von GitHub für Versionskontrolle und Zusammenarbeit.
 
 ---
+
