@@ -1,20 +1,29 @@
 # Inhaltsverzeichnis
 
-1. [GitHub-Projekt mit Google Cloud Build verbinden](#1-github-projekt-mit-google-cloud-build-verbinden)
-2. [Trigger für Pipeline bei jedem Push erstellen](#2-trigger-für-pipeline-bei-jedem-push-erstellen)
-3. [Cloud-Projekt und Budget einrichten](#3-cloud-projekt-und-budget-einrichten)
-4. [cloudbuild.yaml erweitern und anpassen](#4-cloudbuildyaml-erweitern-und-anpassen)
-5. [Dockerfile erweitern und anpassen](#5-dockerfile-erweitern-und-anpassen)
-6. [Cloud Run Deployment überprüfen](#6-cloud-run-deployment-überprüfen)
-7. [Berechtigungen anpassen](#7-berechtigungen-anpassen)
-8. [Projekt pushen und Pipeline testen](#8-projekt-pushen-und-pipeline-testen)
-9. [Logs und Fehleranalyse](#9-logs-und-fehleranalyse)
-10. [Service-URL kopieren und Anwendung testen](#10-service-url-kopieren-und-anwendung-testen)
-11. [Nützliche Links](#11-nützliche-links)
+1. [Einleitung](#1-einleitung)
+2. [GitHub-Projekt mit Google Cloud Build verbinden](#2-github-projekt-mit-google-cloud-build-verbinden)
+3. [Trigger für Pipeline bei jedem Push erstellen](#3-trigger-für-pipeline-bei-jedem-push-erstellen)
+4. [Cloud-Projekt und Budget einrichten](#4-cloud-projekt-und-budget-einrichten)
+5. [cloudbuild.yaml erweitern und anpassen](#5-cloudbuildyaml-erweitern-und-anpassen)
+6. [Dockerfile erweitern und anpassen](#6-dockerfile-erweitern-und-anpassen)
+7. [Cloud Run Deployment überprüfen](#7-cloud-run-deployment-überprüfen)
+8. [Berechtigungen anpassen](#8-berechtigungen-anpassen)
+9. [Projekt pushen und Pipeline testen](#9-projekt-pushen-und-pipeline-testen)
+10. [Logs und Fehleranalyse](#10-logs-und-fehleranalyse)
+11. [Service-URL kopieren und Anwendung testen](#11-service-url-kopieren-und-anwendung-testen)
+12. [Nützliche Links](#12-nützliche-links)
 
 ---
 
-## 1. GitHub-Projekt mit Google Cloud Build verbinden
+## 1. Einleitung
+
+In diesem Leitfaden wird Schritt für Schritt erklärt, wie ein GitHub-Projekt in Google Cloud integriert wird, um eine automatisierte CI/CD-Pipeline mit Cloud Build und Cloud Run zu erstellen. Ziel ist es, ein Python-Projekt zu entwickeln, zu testen und bereitzustellen, wobei die wichtigsten Cloud-Dienste effizient genutzt werden.
+
+---
+
+## 2. GitHub-Projekt mit Google Cloud Build verbinden
+
+Verknüpfung des GitHub-Repositorys mit Google Cloud Build, um automatische Builds und Tests zu ermöglichen.
 
 ### Google Cloud Console öffnen
 Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
@@ -30,7 +39,9 @@ Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
 
 ---
 
-## 2. Trigger für Pipeline bei jedem Push erstellen
+## 3. Trigger für Pipeline bei jedem Push erstellen
+
+Automatisierung der CI/CD-Pipeline bei jedem Push, um den Entwicklungsprozess zu optimieren.
 
 1. Gehe zu **Cloud Build → Trigger**.
 2. Klicke auf **Trigger hinzufügen** und fülle die Felder wie folgt aus:
@@ -46,7 +57,9 @@ Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
 
 ---
 
-## 3. Cloud-Projekt und Budget einrichten
+## 4. Cloud-Projekt und Budget einrichten
+
+Verwaltung der Cloud-Ressourcen und Kostenkontrolle durch Budgetierung.
 
 ### Neues Projekt erstellen
 
@@ -69,7 +82,9 @@ Navigiere zur Google Cloud Console und wähle den Bereich **Cloud Build** aus.
 
 ---
 
-## 4. `cloudbuild.yaml` erweitern und anpassen
+## 5. `cloudbuild.yaml` erweitern und anpassen
+
+Definition der Schritte für den Build- und Deployment-Prozess.
 
 ### Inhalt von `cloudbuild.yaml`
 ```yaml
@@ -130,7 +145,9 @@ options:
 
 ---
 
-## 5. `Dockerfile` erweitern und anpassen
+## 6. `Dockerfile` erweitern und anpassen
+
+Erstellung eines optimierten Docker-Images für die Anwendung.
 
 ### Inhalt von `Dockerfile`
 ```dockerfile
@@ -172,7 +189,9 @@ EXPOSE 8000
 
 ---
 
-## 6. Cloud Run Deployment überprüfen
+## 7. Cloud Run Deployment überprüfen
+
+Sicherstellen, dass der Service erfolgreich bereitgestellt wurde.
 
 1. Gehe zu **Cloud Run** und überprüfe, ob der Service `rankingladder` erfolgreich aufgelistet ist.
 2. Kopiere die URL des Services und öffne sie in deinem Browser, um die Anwendung zu testen.
@@ -182,7 +201,9 @@ EXPOSE 8000
 
 ---
 
-## 7. Berechtigungen anpassen
+## 8. Berechtigungen anpassen
+
+Gewährleistung der richtigen Zugriffsrechte für die Pipeline und den Service.
 
 1. Öffne die **IAM**-Verwaltung in der Google Cloud Console.
 2. Bearbeite das Dienstkonto und füge die Rolle **Cloud Functions Admin** hinzu.
@@ -192,7 +213,9 @@ EXPOSE 8000
 
 ---
 
-## 8. Projekt pushen und Pipeline testen
+## 9. Projekt pushen und Pipeline testen
+
+Überprüfung der Funktionalität der Pipeline nach Änderungen.
 
 1. Pushe dein Projekt inklusive angepasster `Dockerfile` und `cloudbuild.yaml` zu GitHub. Die Cloud Build Pipeline wird automatisch ausgelöst.
 2. Überprüfe in der Google Cloud Console, ob die Tests und der Build erfolgreich sind.
@@ -201,7 +224,9 @@ EXPOSE 8000
 
 ---
 
-## 9. Logs und Fehleranalyse
+## 10. Logs und Fehleranalyse
+
+Identifikation und Behebung von Problemen im Build-Prozess.
 
 - Falls ein Test fehlschlägt, wird dies in den Logs angezeigt.
 - Öffne den Bereich **Logs** in der Google Cloud Console, um Details einzusehen.
@@ -211,7 +236,9 @@ EXPOSE 8000
 
 ---
 
-## 10. Service-URL kopieren und Anwendung testen
+## 11. Service-URL kopieren und Anwendung testen
+
+Überprüfung der Anwendung in der Produktionsumgebung.
 
 1. Öffne den Bereich **Cloud Run** in der Google Cloud Console.
 2. Wähle den Service `rankingladder` aus der Liste aus.
@@ -226,7 +253,7 @@ EXPOSE 8000
 
 ---
 
-## 11. Nützliche Links
+## 12. Nützliche Links
 
 Hier sind einige hilfreiche Links, um deine Dokumentation und Entwicklung zu unterstützen:
 
@@ -252,4 +279,3 @@ Hier sind einige hilfreiche Links, um deine Dokumentation und Entwicklung zu unt
   Unterstützung zur Nutzung von GitHub für Versionskontrolle und Zusammenarbeit.
 
 ---
-
