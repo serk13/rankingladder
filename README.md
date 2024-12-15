@@ -12,12 +12,17 @@
 10. [Logs und Fehleranalyse](#10-logs-und-fehleranalyse)
 11. [Service-URL kopieren und Anwendung testen](#11-service-url-kopieren-und-anwendung-testen)
 12. [Nützliche Links](#12-nützliche-links)
+13. [Herausforderungen](#13-herausforderungen)
+
+---
 
 ---
 
 ## 1. Einleitung
 
-In diesem Leitfaden wird Schritt für Schritt erklärt, wie ein GitHub-Projekt in Google Cloud integriert wird, um eine automatisierte CI/CD-Pipeline mit Cloud Build und Cloud Run zu erstellen. Ziel ist es, ein Python-Projekt zu entwickeln, zu testen und bereitzustellen, wobei die wichtigsten Cloud-Dienste effizient genutzt werden.
+In diesem Leitfaden wird Schritt für Schritt erklärt, wie ein GitHub-Projekt in Google Cloud integriert wird, um eine automatisierte CI/CD-Pipeline mit Cloud Build und Cloud Run zu erstellen. Ziel ist es, ein Python-Projekt zu entwickeln, zu testen und bereitzustellen, wobei die wichtigsten Cloud-Dienste effizient genutzt werden. 
+
+Die Anleitung richtet sich sowohl an Anfänger als auch an Fortgeschrittene, die ihre Kenntnisse im Bereich Cloud-Technologien erweitern möchten. Zusätzlich bietet sie wertvolle Einblicke in den Umgang mit Google Cloud und die Automatisierung von Entwicklungsprozessen. Am Ende des Dokuments befinden sich hilfreiche Links und ein Kapitel zu den Herausforderungen des Projekts.
 
 ---
 
@@ -277,5 +282,15 @@ Hier sind einige hilfreiche Links, um deine Dokumentation und Entwicklung zu unt
 
 - **GitHub Hilfe**: [https://docs.github.com/](https://docs.github.com/)  
   Unterstützung zur Nutzung von GitHub für Versionskontrolle und Zusammenarbeit.
+
+---
+
+## 13. Herausforderungen
+
+Es war eine Herausforderung, Google Cloud Build korrekt zum Laufen zu bringen, da Probleme bei der Installation von `pytest` auftraten. 
+Ein weiteres Problem bestand darin, die `cloudbuild.yaml`-Datei eigenständig so zu konfigurieren, dass sie funktionierte. 
+Die Konfigurationen in der Google Cloud selbst waren jedoch schnell verständlich. Auch das Debugging der fehlgeschlagenen Tests erforderte zusätzliche Zeit,
+da die Logs nicht immer selbsterklärend waren. Letztendlich war es auch eine Herausforderung, die Berechtigungen für die Dienste korrekt anzupassen, um alle Prozesse fehlerfrei 
+durchzuführen. Insgesamt war das Thema spannend und sehr hilfreich, um ein tieferes Verständnis für Cloud-Technologien zu entwickeln.
 
 ---
